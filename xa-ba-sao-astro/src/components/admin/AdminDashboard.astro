@@ -1,0 +1,116 @@
+---
+import AdminLayout from "./AdminLayout";
+import { MapPin, Users, Building2, TrendingUp, Eye } from "lucide-react";
+import { HAMLETS_DATA, COMMUNE_ORG_DATA } from "@/lib/data";
+
+interface Props {
+    activeMenu?: string;
+}
+
+const { activeMenu = "dashboard" } = Astro.props;
+
+// In a real app, these would come from the database
+const stats = [
+    { label: "Tổng số Ấp", value: HAMLETS_DATA.length, icon: MapPin, color: "bg-blue-500", change: "+0" },
+    { label: "Lãnh đạo xã", value: COMMUNE_ORG_DATA.reduce((acc, g) => acc + g.members.length, 0), icon: Users, color: "bg-green-500", change: "+0" },
+    { label: "Nhóm tổ chức", value: COMMUNE_ORG_DATA.length, icon: Building2, color: "bg-purple-500", change: "+0" },
+    { label: "Lượt truy cập", value: "1,234", icon: Eye, color: "bg-amber-500", change: "+12%" },
+];
+---
+
+<AdminLayout activeMenu={activeMenu} client:load>
+    <div class="p-6 lg:p-8">
+        <div class="mb-8">
+            <h1 class="text-3xl font-black text-slate-900">Tổng quan</h1>
+            <p class="text-slate-500 mt-1">Chào mừng trở lại! Đây là tổng quan hệ thống.</p>
+        </div>
+
+        {/* Stats Grid */}
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {stats.map((stat) => (
+                <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-500">{stat.label}</p>
+                            <p class="text-3xl font-black text-slate-900 mt-1">{stat.value}</p>
+                        </div>
+                        <div class={`w-12 h-12 ${stat.color} rounded-xl flex items-center justify-center text-white`}>
+                            <stat.icon size={24} />
+                        </div>
+                    </div>
+                    <div class="mt-4 flex items-center gap-1 text-sm">
+                        <TrendingUp size={14} class="text-green-500" />
+                        <span class="text-green-600 font-medium">{stat.change}</span>
+                        <span class="text-slate-400">so với tháng trước</span>
+                    </div>
+                </div>
+            ))}
+        </div>
+
+        {/* Quick Actions */}
+        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm mb-8">
+            <h2 class="text-lg font-bold text-slate-900 mb-4">Thao tác nhanh</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="/admin/hamlets" class="flex items-center gap-3 p-4 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors text-blue-700 font-medium">
+                    <MapPin size={20} />
+                    Quản lý thông tin Ấp
+                </a>
+                <a href="/admin/organization" class="flex items-center gap-3 p-4 rounded-xl bg-purple-50 hover:bg-purple-100 transition-colors text-purple-700 font-medium">
+                    <Building2 size={20} />
+                    Cập nhật tổ chức
+                </a>
+                <a href="/admin/users" class="flex items-center gap-3 p-4 rounded-xl bg-green-50 hover:bg-green-100 transition-colors text-green-700 font-medium">
+                    <Users size={20} />
+                    Quản lý người dùng
+                </a>
+                <a href="/" target="_blank" class="flex items-center gap-3 p-4 rounded-xl bg-amber-50 hover:bg-amber-100 transition-colors text-amber-700 font-medium">
+                    <Eye size={20} />
+                    Xem trang chủ
+                </a>
+            </div>
+        </div>
+
+        {/* Recent Hamlets */}
+        <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-bold text-slate-900">Danh sách các Ấp</h2>
+                <a href="/admin/hamlets" class="text-sm text-primary font-medium hover:underline">Xem tất cả →</a>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="border-b border-slate-100">
+                            <th class="text-left py-3 px-4 text-sm font-bold text-slate-500">Tên Ấp</th>
+                            <th class="text-left py-3 px-4 text-sm font-bold text-slate-500">Mô tả</th>
+                            <th class="text-left py-3 px-4 text-sm font-bold text-slate-500">Số lãnh đạo</th>
+                            <th class="text-left py-3 px-4 text-sm font-bold text-slate-500">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {HAMLETS_DATA.slice(0, 5).map((hamlet) => (
+                            <tr class="border-b border-slate-50 hover:bg-slate-50">
+                                <td class="py-3 px-4">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary font-bold text-sm">
+                                            {hamlet.shortName}
+                                        </div>
+                                        <span class="font-medium text-slate-900">{hamlet.name}</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 text-sm text-slate-500 max-w-xs truncate">{hamlet.description}</td>
+                                <td class="py-3 px-4 text-sm text-slate-600">{hamlet.leaders.length} người</td>
+                                <td class="py-3 px-4">
+                                    {hamlet.isSpotlight ? (
+                                        <span class="px-2 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-bold">Tiêu điểm</span>
+                                    ) : (
+                                        <span class="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold">Hoạt động</span>
+                                    )}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</AdminLayout>

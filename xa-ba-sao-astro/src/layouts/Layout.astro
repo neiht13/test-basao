@@ -1,8 +1,8 @@
 ---
 import '@/styles/globals.css';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import ChatbotWidget from '@/components/ChatbotWidget';
+import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
+import ChatbotWidget from '@/components/ChatbotWidget.astro';
 
 interface Props {
   title?: string;
@@ -14,12 +14,11 @@ const {
   description = "Xã Ba Sao - Tỉnh Đồng Tháp" 
 } = Astro.props;
 
-// Fetch settings
+// Fetch settings and session
 let systemSettings = null;
+let session = null;
+
 try {
-  // Check if we can fetch from local API (only works in server mode if internal) 
-  // OR simpler: connect to DB directly since this is Astro Server.
-  // Using direct DB import is better for SSR layout
   const { default: SystemSettings } = await import('@/models/SystemSettings');
   const { default: mongoose } = await import('mongoose');
   
@@ -32,8 +31,14 @@ try {
   if (settingsDoc) {
       systemSettings = settingsDoc.toJSON();
   }
+
+  // Handle session for Navbar
+  const { auth } = await import('@/lib/auth');
+  session = await auth.api.getSession({
+    headers: Astro.request.headers
+  });
 } catch (e) {
-  console.error("Layout settings fetch error", e);
+  console.error("Layout server-side error", e);
 }
 
 const finalTitle = systemSettings?.siteName ? `${title} | ${systemSettings.siteName}` : title;
@@ -53,11 +58,11 @@ const finalDesc = systemSettings?.siteDescription || description;
     <title>{finalTitle}</title>
   </head>
   <body class="min-h-screen flex flex-col bg-background text-foreground font-sans">
-    <Navbar client:load />
+    <Navbar session={session} />
     <main class="flex-1">
       <slot />
     </main>
     <Footer />
-    <ChatbotWidget client:idle />
+    <ChatbotWidget />
   </body>
 </html>

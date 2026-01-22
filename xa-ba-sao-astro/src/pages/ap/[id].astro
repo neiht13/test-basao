@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import HamletDetailClient from '@/components/HamletDetailClient';
+import HamletDetail from '@/components/HamletDetail.astro';
 import { HAMLETS_DATA } from '@/lib/data';
 import connectDB from '@/lib/db';
 import Hamlet from '@/models/Hamlet';
@@ -33,5 +33,5 @@ const hamletData = JSON.parse(JSON.stringify(hamlet));
 ---
 
 <Layout title={`${hamletData.name} - Xã Ba Sao`} description={hamletData.description}>
-  <HamletDetailClient hamlet={hamletData} client:load />
+  <HamletDetail hamlet={hamletData} />
 </Layout>

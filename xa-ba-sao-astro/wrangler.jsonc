@@ -1,0 +1,14 @@
+{
+    "name": "xabasao",
+    "compatibility_date": "2026-01-22",
+    "compatibility_flags": [
+        "nodejs_compat"
+    ],
+    "pages_build_output_dir": "./dist",
+    "kv_namespaces": [
+        {
+            "binding": "SESSION",
+            "id": "45fb79af19fb43b0a9d9b7017069a479"
+        }
+    ]
+}

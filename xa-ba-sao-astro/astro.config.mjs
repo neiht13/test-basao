@@ -1,18 +1,20 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import react from '@astrojs/react';
-import node from '@astrojs/node';
+import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
     output: 'server',
-    adapter: node({ mode: 'standalone' }),
+    adapter: cloudflare({
+        imageService: 'compile'
+    }),
     integrations: [
         tailwind(),
         react()
     ],
     vite: {
         ssr: {
-            noExternal: ['lucide-react', 'react-map-gl', 'maplibre-gl']
+            noExternal: ['lucide-react', 'maplibre-gl']
         }
     }
 });

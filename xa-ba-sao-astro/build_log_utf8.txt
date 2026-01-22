@@ -1,0 +1,154 @@
+﻿node.exe : npm warn Unknown user config 
+"python". This will stop working in the 
+next major version of npm.
+At line:1 char:1
++ & "C:\nvm4w\nodejs/node.exe" 
+"C:\nvm4w\nodejs/node_modules/npm/bin/np ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: 
+    (npm warn Unknow...version of npm.:Str  
+  ing) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommand 
+   Error
+ 
+[2m09:38:56[22m [34m[@astrojs/cloudflare][39m Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
+[2m09:38:56[22m [34m[@astrojs/cloudflare][39m If you see the error "Invalid binding `SESSION`" in your build output, you need to add the binding to your wrangler config file.
+[33m[1m09:38:56[22m [WARN] [adapter][39m Cloudflare does not support sharp at runtime. However, you can configure `imageService: "compile"` to optimize images with sharp on prerendered pages during build time.
+[2m09:38:56[22m [34m[content][39m Syncing content
+[2m09:38:56[22m [34m[content][39m Synced content
+[2m09:38:56[22m [34m[types][39m Generated [2m65ms[22m
+[2m09:38:56[22m [34m[build][39m output: [34m"server"[39m
+[2m09:38:56[22m [34m[build][39m mode: [34m"server"[39m
+[2m09:38:56[22m [34m[build][39m directory: [34mD:\VNPT\NSTH\Development\xa-ba-sao-info\xa-ba-sao-astro\dist\[39m
+[2m09:38:56[22m [34m[build][39m adapter: [32m@astrojs/cloudflare[39m
+[2m09:38:56[22m [34m[build][39m Collecting build info...
+[2m09:38:56[22m [34m[build][39m [32mΓ£ô Completed in 163ms.[39m
+[2m09:38:56[22m [34m[build][39m Building server entrypoints...
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from "node_modules\mongoose\lib\mongoose.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "async_hooks" imported from "node_modules\mongoose\lib\mongoose.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "stream" imported from "node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\drivers\node-mongodb-native\collection.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "stream" imported from "node_modules\mongodb\lib\cursor\abstract_cursor.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "stream" imported from "node_modules\mongodb\lib\gridfs\download.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from "node_modules\mongodb\lib\mongo_types.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "fs" imported from "node_modules\mongodb\lib\mongo_client.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "stream" imported from "node_modules\mongodb\lib\gridfs\upload.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "net" imported from "node_modules\mongodb\lib\client-side-encryption\auto_encrypter.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "dns" imported from "node_modules\mongodb\lib\cmap\auth\gssapi.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongodb\lib\cmap\wire_protocol\compression.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "zlib" imported from "node_modules\mongodb\lib\cmap\wire_protocol\compression.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongodb\lib\mongo_logger.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "dns" imported from "node_modules\mongodb\lib\sdam\srv_polling.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "timers" imported from "node_modules\mongodb\lib\sdam\srv_polling.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from "node_modules\mongoose\lib\schema.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from "node_modules\mongoose\lib\document.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\document.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\cast.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\query.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from "node_modules\mongoose\lib\model.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\model.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\error\setOptionError.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from "node_modules\mongoose\lib\collection.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from "node_modules\mongoose\lib\connection.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "assert" imported from "node_modules\mquery\lib\mquery.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mquery\lib\mquery.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "crypto" imported from "node_modules\mongodb\lib\utils.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "fs" imported from "node_modules\mongodb\lib\utils.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "http" imported from "node_modules\mongodb\lib\utils.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "timers" imported from "node_modules\mongodb\lib\utils.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "url" imported from "node_modules\mongodb\lib\utils.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongodb\lib\utils.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "timers" imported from "node_modules\mongodb\lib\timeout.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "child_process" imported from "node_modules\mongodb\lib\client-side-encryption\mongocryptd_manager.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "crypto" imported from "node_modules\mongodb\lib\cmap\auth\scram.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\schema\array.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from "node_modules\mongoose\lib\schema\documentArray.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:57[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from "node_modules\mongoose\lib\schema\subdocument.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\helpers\populate\modelNamesFromRefPath.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from "node_modules\mongoose\lib\types\arraySubdocument.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\types\map.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\types\subdocument.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\helpers\populate\validateRef.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\error\validation.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\helpers\common.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\error\cast.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "stream" imported from "node_modules\mongoose\lib\cursor\aggregationCursor.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\cursor\aggregationCursor.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "stream" imported from "node_modules\mongoose\lib\cursor\queryCursor.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from "node_modules\mongoose\lib\cursor\queryCursor.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\cursor\queryCursor.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\error\notFound.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "assert" imported from "node_modules\mongoose\lib\cast\number.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from "node_modules\mongoose\lib\cursor\changeStream.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from "node_modules\mongoose\lib\helpers\model\castBulkWrite.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "os" imported from "node_modules\mongodb\lib\cmap\handshake\client_metadata.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "process" imported from "node_modules\mongodb\lib\cmap\handshake\client_metadata.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "fs/promises" imported from "node_modules\mongodb\lib\client-side-encryption\state_machine.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "net" imported from "node_modules\mongodb\lib\client-side-encryption\state_machine.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "tls" imported from "node_modules\mongodb\lib\client-side-encryption\state_machine.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "dns" imported from "node_modules\mongodb\lib\connection_string.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "url" imported from "node_modules\mongodb\lib\connection_string.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "timers/promises" imported from "node_modules\mongodb\lib\cmap\auth\mongodb_oidc\callback_workflow.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "assert" imported from "node_modules\mongoose\lib\cast\date.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "assert" imported from "node_modules\mongoose\lib\cast\decimal128.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "assert" imported from "node_modules\mongoose\lib\cast\double.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "assert" imported from "node_modules\mongoose\lib\cast\int32.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "fs/promises" imported from "node_modules\mongodb\lib\cmap\auth\mongodb_oidc\k8s_machine_workflow.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:58[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "fs" imported from "node_modules\mongodb\lib\cmap\auth\mongodb_oidc\token_machine_workflow.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:59[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "timers" imported from "node_modules\mongodb\lib\sdam\monitor.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:59[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "stream" imported from "node_modules\mongodb\lib\cmap\connection.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:59[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "timers" imported from "node_modules\mongodb\lib\cmap\connection.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:59[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "timers" imported from "node_modules\mongodb\lib\cmap\connection_pool.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:59[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "node:async_hooks" imported from "node_modules\@better-auth\core\dist\async_hooks\index.mjs". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:59[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "net" imported from "node_modules\mongodb\lib\cmap\connect.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:38:59[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "tls" imported from "node_modules\mongodb\lib\cmap\connect.js". Consider adding it to environments.ssr.external if it is intended.[39m
+[31m[1m09:39:02[22m [ERROR] [vite][39m 
+[31mΓ£ù[39m Build failed in 6.30s
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "stream" imported from " stream?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "fs" imported from " fs?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "events" imported from " events?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "net" imported from " net?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "dns" imported from " dns?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "util" imported from " util?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "zlib" imported from " zlib?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "timers" imported from " timers?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "crypto" imported from " crypto?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "http" imported from " http?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "url" imported from " url?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "os" imported from " os?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "process" imported from " process?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "fs/promises" imported from " fs\promises?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "tls" imported from " tls?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "child_process" imported from " child_process?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "timers/promises" imported from " timers\promises?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "async_hooks" imported from " async_hooks?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[33m[1m09:39:02[22m [WARN] [vite][39m [33m[plugin vite:resolve] Automatically externalized node built-in module "assert" imported from " assert?commonjs-external". Consider adding it to environments.ssr.external if it is intended.[39m
+[vite]: Rollup failed to resolve import 
+"@/models/OrgGroup" from "D:/VNPT/NSTH/Devel
+opment/xa-ba-sao-info/xa-ba-sao-astro/src/co
+mponents/OrganizationPage.astro".
+This is most likely unintended because it 
+can break your application at runtime.
+If you do want to externalize this module 
+explicitly add it to
+`build.rollupOptions.external`
+  [1mStack trace:[22m
+[2m    at viteLog (file:///D:/VNPT/NSTH/Dev
+elopment/xa-ba-sao-info/xa-ba-sao-astro/node
+_modules/vite/dist/node/chunks/dep-D4NMHUTW.
+js:46374:15)
+    at onwarn (file:///D:/VNPT/NSTH/Developm
+ent/xa-ba-sao-info/xa-ba-sao-astro/node_modu
+les/@vitejs/plugin-react/dist/index.js:90:7)
+    at onRollupLog (file:///D:/VNPT/NSTH/Dev
+elopment/xa-ba-sao-info/xa-ba-sao-astro/node
+_modules/vite/dist/node/chunks/dep-D4NMHUTW.
+js:46422:5)
+    at file:///D:/VNPT/NSTH/Development/xa-b
+a-sao-info/xa-ba-sao-astro/node_modules/roll
+up/dist/es/shared/node-entry.js:21077:32
+    at ModuleLoader.handleInvalidResolvedId 
+(file:///D:/VNPT/NSTH/Development/xa-ba-sao-
+info/xa-ba-sao-astro/node_modules/rollup/dis
+t/es/shared/node-entry.js:21708:26)[22m

@@ -1,0 +1,111 @@
+---
+import { Bot, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+---
+
+<div class="fixed bottom-6 right-6 z-50">
+    {/* Chat Window */}
+    <div 
+        id="chat-window"
+        class="absolute bottom-20 right-0 w-[380px] h-[550px] bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden transition-all duration-500 transform origin-bottom-right scale-90 opacity-0 translate-y-4 pointer-events-none"
+    >
+        {/* Close Button */}
+        <button
+            id="close-chat"
+            class="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 hover:rotate-90 flex items-center justify-center transition-all duration-300"
+        >
+            <X size={16} class="text-slate-600" />
+        </button>
+
+        {/* Iframe Container - Full size */}
+        <div id="iframe-container" class="w-full h-full">
+            {/* Iframe will be injected here for lazy loading */}
+        </div>
+    </div>
+
+    {/* Toggle Button with Tooltip */}
+    <div class="relative group">
+        {/* Tooltip */}
+        <div 
+            id="chat-tooltip"
+            class="absolute right-full top-1/2 -translate-y-1/2 mr-3 px-3 py-2 bg-slate-700 text-white text-sm rounded-lg whitespace-nowrap pointer-events-none shadow-lg transition-all duration-300 opacity-100 translate-x-0 animate-bounce"
+        >
+            Trợ lý tra cứu TTHC
+            <div class="absolute left-full top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-b-[6px] border-l-[6px] border-t-transparent border-b-transparent border-l-slate-700"></div>
+        </div>
+
+        {/* Pulse Ring Effect */}
+        <div id="pulse-effect">
+            <span class="absolute inset-0 rounded-full bg-primary/30 animate-ping"></span>
+            <span class="absolute inset-[-4px] rounded-full bg-primary/20 animate-pulse"></span>
+        </div>
+
+        <button
+            id="toggle-chat"
+            class="relative w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-500 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 hover:scale-110 hover:shadow-xl hover:shadow-primary/25"
+        >
+            <div id="chat-icon-container" class="transition-all duration-500">
+                <Bot id="bot-icon" size={24} class="text-white" />
+                <X id="close-bot-icon" size={24} class="text-white hidden" />
+            </div>
+        </button>
+    </div>
+</div>
+
+<script>
+    const chatWindow = document.getElementById('chat-window');
+    const toggleBtn = document.getElementById('toggle-chat');
+    const closeBtn = document.getElementById('close-chat');
+    const tooltip = document.getElementById('chat-tooltip');
+    const pulse = document.getElementById('pulse-effect');
+    const iframeContainer = document.getElementById('iframe-container');
+    const botIcon = document.getElementById('bot-icon');
+    const closeBotIcon = document.getElementById('close-bot-icon');
+    const chatIconContainer = document.getElementById('chat-icon-container');
+
+    const iframeSrc = "https://ai.dongthap.gov.vn/chat-frame/985cbd9b-96bb-41b9-8caf-fa31393ca31b/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmVjM2JlZDUtMmMxNi00N2VkLWE1MjItNWUzYmE2MDM1M2U1IiwicGVybWlzc2lvbnMiOlsiRVhQRVJJRU5DRV9NQU5BR0VSIiwiRklMRV9NQU5BR0VSIiwiUE9TSVRJT05fTUFOQUdFUiIsIlNZU1RFTV9NQU5BR0VSIiwiVVNFUl9NQU5BR0VSIiwiQk9UX01BTkFHRVIiXSwiZXhwIjoxMjcxODAyNjM1Nzh9.9qElPdiVX2j-qNMFius0bpLkw-Qt13PdzFl6Y4SJN1o";
+
+    function toggleChat() {
+        const isOpen = chatWindow?.classList.contains('scale-100');
+        
+        if (isOpen) {
+            // Close
+            chatWindow?.classList.add('scale-90', 'opacity-0', 'translate-y-4', 'pointer-events-none');
+            chatWindow?.classList.remove('scale-100', 'opacity-100', 'translate-y-0', 'pointer-events-auto');
+            
+            tooltip?.classList.remove('opacity-0', 'translate-x-2');
+            tooltip?.classList.add('opacity-100', 'translate-x-0', 'animate-bounce');
+            
+            pulse?.classList.remove('hidden');
+            
+            toggleBtn?.classList.add('bg-gradient-to-r', 'from-primary', 'to-blue-600');
+            toggleBtn?.classList.remove('bg-slate-600', 'rotate-0');
+            
+            botIcon?.classList.remove('hidden');
+            closeBotIcon?.classList.add('hidden');
+        } else {
+            // Open
+            chatWindow?.classList.remove('scale-90', 'opacity-0', 'translate-y-4', 'pointer-events-none');
+            chatWindow?.classList.add('scale-100', 'opacity-100', 'translate-y-0', 'pointer-events-auto');
+            
+            tooltip?.classList.add('opacity-0', 'translate-x-2');
+            tooltip?.classList.remove('opacity-100', 'translate-x-0', 'animate-bounce');
+            
+            pulse?.classList.add('hidden');
+            
+            toggleBtn?.classList.remove('bg-gradient-to-r', 'from-primary', 'to-blue-600');
+            toggleBtn?.classList.add('bg-slate-600', 'rotate-0');
+            
+            botIcon?.classList.add('hidden');
+            closeBotIcon?.classList.remove('hidden');
+
+            // Lazy load iframe
+            if (iframeContainer && !iframeContainer.innerHTML.includes('iframe')) {
+                iframeContainer.innerHTML = `<iframe src="${iframeSrc}" id="chatbot-frame" allow="microphone" class="w-full h-full border-0"></iframe>`;
+            }
+        }
+    }
+
+    toggleBtn?.addEventListener('click', toggleChat);
+    closeBtn?.addEventListener('click', toggleChat);
+</script>

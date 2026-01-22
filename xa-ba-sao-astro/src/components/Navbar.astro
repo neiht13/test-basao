@@ -1,0 +1,183 @@
+---
+import { Globe, Phone, Menu, X, LogOut, User } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+// In Astro, we can check session on the server
+interface Props {
+    session?: any;
+}
+
+const { session } = Astro.props;
+const pathname = Astro.url.pathname;
+const isActive = (path: string) => pathname === path;
+---
+
+<header
+    id="main-header"
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out py-4"
+>
+    <nav
+        id="main-nav"
+        class="container mx-auto px-4 transition-all duration-300 rounded-2xl bg-transparent h-20 flex items-center justify-between"
+    >
+        <a href="/" class="flex items-center gap-3 group">
+            <div class="relative h-12 w-12 transition-all duration-300 group-hover:scale-110">
+                <img
+                    src="/Huy_Hiệu_Đoàn.png"
+                    alt="Logo Đoàn Thanh niên"
+                    class="w-full h-full object-contain filter drop-shadow-md"
+                />
+            </div>
+            <div>
+                <h1 id="header-title" class="text-lg font-black leading-none tracking-tight transition-colors uppercase text-slate-900">
+                    Trang thông tin tra cứu xã Ba Sao
+                </h1>
+                <p id="header-subtitle" class="text-[10px] font-bold uppercase tracking-[0.2em] mt-1 transition-colors text-slate-800">
+                    Đồng Tháp
+                </p>
+            </div>
+        </a>
+
+        {/* Desktop Menu */}
+        <div class="hidden md:flex items-center gap-1 bg-white/50 backdrop-blur-sm p-1.5 rounded-full border border-white/20 shadow-sm">
+            <a href="/" class={cn(
+                "px-5 py-2 rounded-full text-sm font-bold transition-all duration-300",
+                isActive('/')
+                    ? 'bg-primary text-primary-foreground shadow-md'
+                    : 'text-slate-600 hover:text-primary hover:bg-white/50'
+            )}>
+                Trang chủ
+            </a>
+            <a href="/to-chuc-bo-may" class={cn(
+                "px-5 py-2 rounded-full text-sm font-bold transition-all duration-300",
+                isActive('/to-chuc-bo-may')
+                    ? 'bg-primary text-primary-foreground shadow-md'
+                    : 'text-slate-600 hover:text-primary hover:bg-white/50'
+            )}>
+                Tổ chức bộ máy
+            </a>
+            {session && (
+                <a href="/admin" class={cn(
+                    "px-5 py-2 rounded-full text-sm font-bold transition-all duration-300",
+                    isActive('/admin')
+                        ? 'bg-primary text-primary-foreground shadow-md'
+                        : 'text-slate-600 hover:text-primary hover:bg-white/50'
+                )}>
+                    Quản trị
+                </a>
+            )}
+        </div>
+
+        <div class="hidden md:flex items-center gap-3">
+            {session ? (
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-2 text-sm font-bold text-slate-700 bg-white/50 px-3 py-1.5 rounded-full border border-white/20">
+                        <User size={16} />
+                        {session.user.name}
+                    </div>
+                    <button
+                        id="logout-btn"
+                        class="p-2 rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition-colors"
+                        title="Đăng xuất"
+                    >
+                        <LogOut size={18} />
+                    </button>
+                </div>
+            ) : (
+                <button class="group relative overflow-hidden bg-gradient-to-r from-primary to-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-bold shadow-lg hover:shadow-primary/25 transition-all hover:-translate-y-0.5 active:translate-y-0">
+                    <div class="absolute inset-0 bg-white/20 group-hover:translate-x-full transition-transform duration-500 ease-out -skew-x-12 -translate-x-full" />
+                    <span class="relative flex items-center gap-2">
+                        <Phone size={16} /> Liên hệ
+                    </span>
+                </button>
+            )}
+        </div>
+
+        {/* Mobile Toggle */}
+        <button
+            id="mobile-menu-toggle"
+            class="md:hidden p-2 text-slate-700 bg-white/50 backdrop-blur-sm rounded-lg border border-white/20"
+        >
+            <Menu id="menu-icon" size={24} />
+            <X id="close-icon" size={24} class="hidden" />
+        </button>
+    </nav>
+
+    {/* Mobile Menu Overlay */}
+    <div 
+        id="mobile-menu"
+        class="fixed inset-0 bg-background/95 backdrop-blur-xl z-40 md:hidden transition-all duration-300 flex flex-col justify-center items-center gap-8 opacity-0 pointer-events-none"
+    >
+        <a href="/" class="text-2xl font-bold text-foreground hover:text-primary transition-colors">Trang chủ</a>
+        <a href="/to-chuc-bo-may" class="text-2xl font-bold text-foreground hover:text-primary transition-colors">Tổ chức bộ máy</a>
+        {session && (
+            <a href="/admin" class="text-2xl font-bold text-foreground hover:text-primary transition-colors">Quản trị</a>
+        )}
+        {session ? (
+            <button id="mobile-logout-btn" class="bg-red-50 text-red-600 px-8 py-3 rounded-full text-lg font-bold shadow-xl">Đăng xuất</button>
+        ) : (
+            <button class="bg-primary text-primary-foreground px-8 py-3 rounded-full text-lg font-bold shadow-xl">Liên hệ ngay</button>
+        )}
+    </div>
+</header>
+
+<script>
+    import { authClient } from "@/lib/auth-client";
+
+    const header = document.getElementById('main-header');
+    const nav = document.getElementById('main-nav');
+    const title = document.getElementById('header-title');
+    const subtitle = document.getElementById('header-subtitle');
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const logoutBtns = [document.getElementById('logout-btn'), document.getElementById('mobile-logout-btn')];
+
+    // Scroll effect
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            header?.classList.remove('py-4');
+            header?.classList.add('py-2');
+            nav?.classList.remove('bg-transparent', 'h-20');
+            nav?.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-lg', 'border', 'border-white/20', 'h-16');
+            title?.classList.remove('text-slate-900');
+            title?.classList.add('text-primary');
+            subtitle?.classList.remove('text-slate-800');
+            subtitle?.classList.add('text-muted-foreground');
+        } else {
+            header?.classList.remove('py-2');
+            header?.classList.add('py-4');
+            nav?.classList.add('bg-transparent', 'h-20');
+            nav?.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-lg', 'border', 'border-white/20', 'h-16');
+            title?.classList.add('text-slate-900');
+            title?.classList.remove('text-primary');
+            subtitle?.classList.add('text-slate-800');
+            subtitle?.classList.remove('text-muted-foreground');
+        }
+    });
+
+    // Mobile menu toggle
+    menuToggle?.addEventListener('click', () => {
+        const isOpen = mobileMenu?.classList.contains('opacity-100');
+        if (isOpen) {
+            mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
+            mobileMenu?.classList.remove('opacity-100', 'pointer-events-auto');
+            menuIcon?.classList.remove('hidden');
+            closeIcon?.classList.add('hidden');
+        } else {
+            mobileMenu?.classList.remove('opacity-0', 'pointer-events-none');
+            mobileMenu?.classList.add('opacity-100', 'pointer-events-auto');
+            menuIcon?.classList.add('hidden');
+            closeIcon?.classList.remove('hidden');
+        }
+    });
+
+    // Logout
+    logoutBtns.forEach(btn => {
+        btn?.addEventListener('click', async () => {
+            await authClient.signOut();
+            window.location.href = '/';
+        });
+    });
+</script>

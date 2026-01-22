@@ -1,0 +1,403 @@
+---
+import { MapPin, Users, Phone, ShieldCheck, UserCircle2, Building2, ArrowLeft, AreaChart, Home, UserCheck, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import type { Hamlet } from "@/lib/data";
+
+interface Props {
+    hamlet: Hamlet;
+}
+
+const { hamlet } = Astro.props;
+const bgImage = hamlet.coverImage || "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=1000";
+
+const stats = [
+    { label: "Diện tích", value: hamlet.stats?.area, icon: AreaChart, color: "text-blue-600" },
+    { label: "Hộ dân", value: hamlet.stats?.households, icon: Home, color: "text-indigo-600" },
+    { label: "Nhân khẩu", value: hamlet.stats?.population, icon: Users, color: "text-violet-600" },
+    { label: "Đảng viên", value: hamlet.stats?.partyMembers, icon: UserCheck, color: "text-red-600" }
+];
+
+const extendedStats = [
+    { label: "ĐV miễn công tác", value: hamlet.stats?.exemptPartyMembers, show: !!hamlet.stats?.exemptPartyMembers },
+    { label: "Chi ủy viên", value: hamlet.stats?.partyCellMembers, show: !!hamlet.stats?.partyCellMembers },
+    { label: "Tổ NDTQ", value: hamlet.stats?.selfGovGroups, show: !!hamlet.stats?.selfGovGroups },
+    { label: "Nghề chính", value: hamlet.stats?.mainOccupation, show: !!hamlet.stats?.mainOccupation }
+].filter(stat => stat.show);
+---
+
+<div class="min-h-screen bg-slate-50">
+    {/* Rich Header with Parallax-like effect */}
+    <div class="relative h-[45vh] min-h-[400px] flex items-end pb-12 overflow-hidden group">
+        <div class="absolute inset-0 bg-slate-900">
+            <img
+                src={bgImage}
+                alt={hamlet.name}
+                class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000 ease-out"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10 w-full mb-8">
+            <a href="/" class="inline-flex items-center gap-2 text-white/80 hover:text-white mb-6 transition-colors font-medium backdrop-blur-sm bg-white/10 px-4 py-2 rounded-full border border-white/10 hover:bg-white/20">
+                <ArrowLeft size={16} /> Quay lại trang chủ
+            </a>
+
+            <div class="flex flex-col md:flex-row md:items-end gap-6">
+                <div class="hero-animate opacity-0 translate-y-4 transition-all duration-700 w-24 h-24 bg-white rounded-2xl flex items-center justify-center text-4xl font-black text-slate-900 shadow-2xl shadow-black/20 shrink-0 overflow-hidden">
+                    {hamlet.avatar ? (
+                        <img src={hamlet.avatar} alt="Avatar" class="w-full h-full object-cover" />
+                    ) : (
+                        hamlet.shortName
+                    )}
+                </div>
+                <div class="flex-1">
+                    <div class="hero-animate opacity-0 translate-y-4 transition-all duration-700 delay-100 flex items-center gap-3 mb-2">
+                        <span class="px-3 py-1 rounded-full bg-primary text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-primary/25">
+                            Đơn vị hành chính
+                        </span>
+                        {hamlet.isSpotlight && (
+                            <span class="px-3 py-1 rounded-full bg-amber-500 text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-amber-500/25">
+                                Tiêu điểm
+                            </span>
+                        )}
+                    </div>
+                    <h1 class="hero-animate opacity-0 translate-y-4 transition-all duration-700 delay-200 text-4xl md:text-6xl font-black text-white mb-2 tracking-tight">{hamlet.name}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8 -mt-8 relative z-20">
+        <div class="bg-white rounded-2xl border border-slate-100 shadow-xl shadow-slate-200/50 p-8 mb-8">
+            <p class="text-xl md:text-2xl text-slate-700 font-medium leading-relaxed mb-6">
+                {hamlet.description}
+            </p>
+            {hamlet.detailedDescription && (
+                <div class="pt-6 border-t border-slate-100">
+                    <p class="text-slate-600 leading-relaxed text-base">{hamlet.detailedDescription}</p>
+                </div>
+            )}
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8">
+            {/* Main Content */}
+            <div class="lg:col-span-8 space-y-8">
+                {/* Stats Cards */}
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {stats.map((stat, idx) => (
+                        <div
+                            class="stat-card opacity-0 translate-y-4 transition-all duration-500 bg-white p-5 rounded-2xl border border-slate-100 shadow-lg shadow-slate-200/50 flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300"
+                            style={`transition-delay: ${400 + idx * 50}ms`}
+                        >
+                            <div class={cn("p-3 rounded-full bg-slate-50 mb-3", stat.color)}>
+                                <stat.icon size={20} />
+                            </div>
+                            <span class="block text-xl font-black text-slate-900 mb-1">{stat.value || "--"}</span>
+                            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">{stat.label}</span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Extended Stats */}
+                {extendedStats.length > 0 && (
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {extendedStats.map((stat, idx) => (
+                            <div
+                                class="stat-card opacity-0 translate-y-4 transition-all duration-500 bg-gradient-to-br from-slate-50 to-white p-4 rounded-xl border border-slate-100 shadow-md flex flex-col items-center text-center hover:-translate-y-1 transition-transform duration-300"
+                                style={`transition-delay: ${600 + idx * 50}ms`}
+                            >
+                                <span class="block text-lg font-bold text-slate-900 mb-1">{stat.value}</span>
+                                <span class="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{stat.label}</span>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
+                {/* Goals */}
+                {hamlet.goals && (
+                    <div class="bg-gradient-to-br from-primary/5 to-primary/10 rounded-2xl border border-primary/20 overflow-hidden">
+                        <div class="px-8 py-6 border-b border-primary/10 flex items-center gap-3">
+                            <div class="p-2 bg-primary/10 rounded-lg text-primary">
+                                <MapPin size={20} />
+                            </div>
+                            <h3 class="font-bold text-xl text-slate-900">Định Hướng Phát Triển</h3>
+                        </div>
+                        <div class="p-8">
+                            <p class="text-slate-700 leading-relaxed text-base italic">{hamlet.goals}</p>
+                        </div>
+                    </div>
+                )}
+
+                {/* Leaders */}
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden">
+                    <div class="px-8 py-6 border-b border-slate-50 flex items-center gap-3 bg-white">
+                        <div class="p-2 bg-primary/10 rounded-lg text-primary">
+                            <Users size={20} />
+                        </div>
+                        <h3 class="font-bold text-xl text-slate-900">Ban Lãnh Đạo Ấp</h3>
+                    </div>
+                    <div class="p-8 grid md:grid-cols-2 gap-6">
+                        {hamlet.leaders.map((leader, idx) => (
+                            <div
+                                class="leader-card opacity-0 translate-y-4 transition-all duration-500 flex items-start gap-5 p-5 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-white transition-all hover:scale-[1.02]"
+                                style={`transition-delay: ${600 + idx * 80}ms`}
+                            >
+                                <div 
+                                    class="lightbox-trigger w-[4.5rem] h-[6rem] rounded-lg bg-white border border-slate-100 flex items-center justify-center overflow-hidden text-slate-300 shadow-sm flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity" 
+                                    data-image={(leader as any).image}
+                                >
+                                    {(leader as any).image ? (
+                                        <img src={(leader as any).image} alt={leader.name} class="w-full h-full object-cover" />
+                                    ) : (
+                                        <div class="flex flex-col items-center justify-center">
+                                            <UserCircle2 size={32} />
+                                        </div>
+                                    )}
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-[10px] font-bold text-primary uppercase mb-1 tracking-wider">{leader.role}</p>
+                                    <p class="text-lg font-bold text-slate-900">{leader.name}</p>
+                                    {leader.phone && (
+                                        <div class="mt-3">
+                                            <a href={`tel:${leader.phone}`} class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-primary transition-colors bg-white px-3 py-1.5 rounded-lg border border-slate-100 shadow-sm">
+                                                <Phone size={12} /> {leader.phone}
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Organizations */}
+                {hamlet.organizations && hamlet.organizations.length > 0 && (
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden">
+                        <div class="px-8 py-6 border-b border-slate-50 flex items-center gap-3 bg-white">
+                            <div class="p-2 bg-blue-50 rounded-lg text-blue-600">
+                                <Building2 size={20} />
+                            </div>
+                            <h3 class="font-bold text-xl text-slate-900">Tổ Chức Chính Trị - Xã Hội</h3>
+                        </div>
+                        <div class="p-8 grid md:grid-cols-2 gap-6">
+                            {(hamlet.organizations as any[]).map((org, idx) => {
+                                const isString = typeof org === 'string';
+                                const name = isString ? org : org.name;
+                                const role = isString ? "Thành viên" : org.role;
+                                const phone = isString ? null : org.phone;
+                                const image = isString ? null : org.image;
+
+                                return (
+                                    <div
+                                        class="leader-card opacity-0 translate-y-4 transition-all duration-500 flex items-start gap-5 p-5 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-white transition-all hover:scale-[1.02]"
+                                        style={`transition-delay: ${700 + idx * 80}ms`}
+                                    >
+                                        <div 
+                                            class="lightbox-trigger w-[4.5rem] h-[6rem] rounded-lg bg-white border border-slate-100 flex items-center justify-center overflow-hidden text-slate-300 shadow-sm flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity"
+                                            data-image={image}
+                                        >
+                                            {image ? (
+                                                <img src={image} alt={name} class="w-full h-full object-cover" />
+                                            ) : (
+                                                <div class="flex flex-col items-center justify-center">
+                                                    <UserCircle2 size={32} />
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-[10px] font-bold text-blue-600 uppercase mb-1 tracking-wider">{role}</p>
+                                            <p class="text-lg font-bold text-slate-900">{name}</p>
+                                            {phone && (
+                                                <div class="mt-3">
+                                                    <a href={`tel:${phone}`} class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-blue-600 transition-colors bg-white px-3 py-1.5 rounded-lg border border-slate-100 shadow-sm">
+                                                        <Phone size={12} /> {phone}
+                                                    </a>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
+
+                {/* Security Section */}
+                {hamlet.security && hamlet.security.length > 0 && (
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-xl shadow-slate-200/50 overflow-hidden">
+                        <div class="px-8 py-6 border-b border-slate-50 flex items-center gap-3 bg-white">
+                            <div class="p-2 bg-green-50 rounded-lg text-green-600">
+                                <ShieldCheck size={20} />
+                            </div>
+                            <h3 class="font-bold text-xl text-slate-900">Tổ An Ninh Trật Tự Cơ Sở</h3>
+                        </div>
+                        <div class="p-8 grid md:grid-cols-2 gap-6">
+                            {hamlet.security.map((member, idx) => (
+                                <div 
+                                    class="leader-card opacity-0 translate-y-4 transition-all duration-500 flex items-start gap-5 p-5 rounded-xl border border-slate-100 bg-white hover:border-green-200 hover:shadow-md transition-all hover:scale-[1.02]"
+                                    style={`transition-delay: ${800 + idx * 80}ms`}
+                                >
+                                    <div 
+                                        class="lightbox-trigger w-[4.5rem] h-[6rem] rounded-lg bg-green-50 flex items-center justify-center overflow-hidden text-green-600 font-black text-xs border border-green-100 flex-shrink-0 cursor-pointer hover:opacity-90 transition-opacity"
+                                        data-image={(member as any).image}
+                                    >
+                                        {(member as any).image ? (
+                                            <img src={(member as any).image} alt={member.name} class="w-full h-full object-cover" />
+                                        ) : (
+                                            <div class="flex flex-col items-center justify-center">
+                                                <ShieldCheck size={24} />
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-[10px] font-bold text-green-600 uppercase mb-1 tracking-wider">{member.role}</p>
+                                        <p class="text-lg font-bold text-slate-900">{member.name}</p>
+                                        {member.phone && (
+                                            <div class="mt-3">
+                                                <a href={`tel:${member.phone}`} class="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-green-600 transition-colors bg-white px-3 py-1.5 rounded-lg border border-slate-100 shadow-sm">
+                                                    <Phone size={12} /> {member.phone}
+                                                </a>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            {/* Sidebar */}
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-xl shadow-slate-200/50 p-8 sticky top-24">
+                    <h3 class="font-bold text-slate-900 mb-6 flex items-center gap-2">
+                        <Building2 size={20} class="text-primary" /> Thông tin khác
+                    </h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                        Ấp {hamlet.name} là một trong những đơn vị hành chính quan trọng của xã Ba Sao.
+                        Người dân luôn đoàn kết, chấp hành tốt chủ trương của Đảng và chính sách pháp luật của Nhà nước.
+                    </p>
+                    <div class="pt-6 border-t border-slate-100">
+                        <h4 class="font-bold text-sm text-slate-900 mb-3">Vị trí địa lý</h4>
+                        <div class="h-64 bg-slate-100 rounded-xl overflow-hidden relative border border-slate-200">
+                            <div id="mini-map" class="w-full h-full"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {/* Lightbox Modal */}
+    <div 
+        id="lightbox" 
+        class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300"
+    >
+        <button id="close-lightbox" class="absolute top-4 right-4 p-2 text-white/50 hover:text-white transition-colors">
+            <X size={32} />
+        </button>
+        <img id="lightbox-img" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl object-contain scale-95 transition-transform duration-300" />
+    </div>
+</div>
+
+<script is:inline define:vars={{ hamletLocation: hamlet.location, hamletShortName: hamlet.shortName }}>
+    window.HAMLET_LOCATION = hamletLocation;
+    window.HAMLET_SHORT_NAME = hamletShortName;
+</script>
+
+<script>
+    import maplibregl from 'maplibre-gl';
+    import 'maplibre-gl/dist/maplibre-gl.css';
+
+    // Animations
+    document.addEventListener('DOMContentLoaded', () => {
+        const animElements = document.querySelectorAll('.hero-animate, .stat-card, .leader-card');
+        animElements.forEach(el => {
+            el.classList.remove('opacity-0', 'translate-y-4');
+            el.classList.add('opacity-100', 'translate-y-0');
+        });
+
+        // Initialize Mini Map
+        initMiniMap();
+        
+        // Setup Lightbox
+        setupLightbox();
+    });
+
+    function initMiniMap() {
+        const location = (window as any).HAMLET_LOCATION || { lng: 105.6793, lat: 10.5364 };
+        const shortName = (window as any).HAMLET_SHORT_NAME;
+
+        const MAP_STYLE = {
+            version: 8,
+            sources: {
+                osm: {
+                    type: 'raster',
+                    tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+                    tileSize: 256,
+                    attribution: '&copy; OpenStreetMap Contributors',
+                    maxzoom: 19
+                }
+            },
+            layers: [{ id: 'osm', type: 'raster', source: 'osm' }]
+        };
+
+        const map = new maplibregl.Map({
+            container: 'mini-map',
+            style: MAP_STYLE as any,
+            center: [location.lng, location.lat],
+            zoom: 14
+        });
+
+        map.addControl(new maplibregl.NavigationControl());
+
+        const el = document.createElement('div');
+        el.className = 'text-primary drop-shadow-lg';
+        el.innerHTML = `
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="animate-bounce">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3" fill="white"></circle>
+            </svg>
+        `;
+
+        new maplibregl.Marker(el)
+            .setLngLat([location.lng, location.lat])
+            .addTo(map);
+    }
+
+    function setupLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+        const closeBtn = document.getElementById('close-lightbox');
+        const triggers = document.querySelectorAll('.lightbox-trigger');
+
+        triggers.forEach(trigger => {
+            trigger.addEventListener('click', () => {
+                const imgUrl = (trigger as HTMLElement).dataset.image;
+                if (imgUrl) {
+                    lightboxImg.src = imgUrl;
+                    lightbox?.classList.remove('opacity-0', 'pointer-events-none');
+                    lightbox?.classList.add('opacity-100', 'pointer-events-auto');
+                    setTimeout(() => {
+                        lightboxImg.classList.remove('scale-95');
+                        lightboxImg.classList.add('scale-100');
+                    }, 50);
+                }
+            });
+        });
+
+        const close = () => {
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            setTimeout(() => {
+                lightbox?.classList.add('opacity-0', 'pointer-events-none');
+                lightbox?.classList.remove('opacity-100', 'pointer-events-auto');
+            }, 300);
+        };
+
+        closeBtn?.addEventListener('click', close);
+        lightbox?.addEventListener('click', (e) => {
+            if (e.target === lightbox) close();
+        });
+    }
+</script>

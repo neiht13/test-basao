@@ -6,7 +6,6 @@ import { Plus, Edit2, Trash2, Search, Save, X, MapPin, Users, Phone, Upload, Ima
 import { cn } from "@/lib/utils";
 import { HAMLETS_DATA, type Hamlet, type Leader } from "@/lib/data";
 import { compressImageToBase64, isValidImageFile } from "@/lib/image-utils";
-import Map, { Marker, NavigationControl } from 'react-map-gl/maplibre';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
@@ -59,7 +58,6 @@ interface HamletExtended extends Omit<Hamlet, 'leaders' | 'security' | 'organiza
 
 
 export default function HamletsManager() {
-    // ... (keep creating state same)
     const [hamlets, setHamlets] = useState<HamletExtended[]>([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [editingHamlet, setEditingHamlet] = useState<HamletExtended | null>(null);
@@ -67,7 +65,6 @@ export default function HamletsManager() {
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
 
-    // ... (keep useEffect and fetchHamlets same)
     useEffect(() => {
         fetchHamlets();
     }, []);
@@ -166,7 +163,6 @@ export default function HamletsManager() {
     return (
         <AdminLayout activeMenu="hamlets">
             <div className="p-6 lg:p-8">
-                {/* ... (keep header and search) ... */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                     <div>
                         <h1 className="text-3xl font-black text-slate-900">Quản lý Ấp</h1>
@@ -296,7 +292,6 @@ function HamletEditModal({ hamlet, isCreating, onSave, onClose }: HamletEditModa
         });
     };
 
-    // Generic Image Upload
     const handleImageUpload = async (section: 'leaders' | 'organizations' | 'security', index: number, file: File) => {
         if (!isValidImageFile(file)) return;
         setUploading(true);
@@ -311,7 +306,6 @@ function HamletEditModal({ hamlet, isCreating, onSave, onClose }: HamletEditModa
         setUploading(false);
     };
 
-    // Image upload for new members
     const handleNewMemberImageUpload = async (setter: any, current: any, file: File) => {
         if (!isValidImageFile(file)) return;
         try {
@@ -358,7 +352,6 @@ function HamletEditModal({ hamlet, isCreating, onSave, onClose }: HamletEditModa
                     </button>
                 </div>
 
-                {/* Tabs */}
                 <div className="flex border-b border-slate-100 px-6 bg-slate-50">
                     {tabs.map((tab) => (
                         <button
@@ -378,66 +371,30 @@ function HamletEditModal({ hamlet, isCreating, onSave, onClose }: HamletEditModa
                 </div>
 
                 <div className="flex-1 overflow-y-auto p-6">
-                    {/* Info Tab */}
                     {activeTab === "info" && (
                         <div className="space-y-6">
-                            {/* ... (Keep existing info tab content) ... */}
                             <div className="grid sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm font-medium text-slate-700 mb-2">Tên Ấp *</label>
-                                    <input
-                                        type="text"
-                                        value={formData.name}
-                                        onChange={(e) => handleChange("name", e.target.value)}
-                                        className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                                        placeholder="Ấp 1"
-                                    />
+                                    <input type="text" value={formData.name} onChange={(e) => handleChange("name", e.target.value)} className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="Ấp 1" />
                                 </div>
                                 <div>
                                     <label className="block text-sm font-medium text-slate-700 mb-2">Tên viết tắt *</label>
-                                    <input
-                                        type="text"
-                                        value={formData.shortName}
-                                        onChange={(e) => handleChange("shortName", e.target.value)}
-                                        className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                                        placeholder="1"
-                                    />
+                                    <input type="text" value={formData.shortName} onChange={(e) => handleChange("shortName", e.target.value)} className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder="1" />
                                 </div>
                             </div>
-
                             <div>
                                 <label className="block text-sm font-medium text-slate-700 mb-2">Mô tả *</label>
-                                <textarea
-                                    value={formData.description}
-                                    onChange={(e) => handleChange("description", e.target.value)}
-                                    rows={3}
-                                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none"
-                                />
+                                <textarea value={formData.description} onChange={(e) => handleChange("description", e.target.value)} rows={3} className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none" />
                             </div>
-
                             <div>
                                 <label className="block text-sm font-medium text-slate-700 mb-2">Mô tả chi tiết</label>
-                                <textarea
-                                    value={formData.detailedDescription || ""}
-                                    onChange={(e) => handleChange("detailedDescription", e.target.value)}
-                                    rows={5}
-                                    className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none"
-                                    placeholder="Nội dung chi tiết hiển thị bên dưới..."
-                                />
+                                <textarea value={formData.detailedDescription || ""} onChange={(e) => handleChange("detailedDescription", e.target.value)} rows={5} className="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none" placeholder="Nội dung chi tiết hiển thị bên dưới..." />
                             </div>
-
                             <div className="flex items-center gap-2">
-                                <input
-                                    type="checkbox"
-                                    id="isSpotlight"
-                                    checked={formData.isSpotlight || false}
-                                    onChange={(e) => handleChange("isSpotlight", e.target.checked)}
-                                    className="w-4 h-4 text-primary rounded focus:ring-primary"
-                                />
+                                <input type="checkbox" id="isSpotlight" checked={formData.isSpotlight || false} onChange={(e) => handleChange("isSpotlight", e.target.checked)} className="w-4 h-4 text-primary rounded focus:ring-primary" />
                                 <label htmlFor="isSpotlight" className="text-sm font-medium text-slate-700">Đánh dấu là Tiêu điểm</label>
                             </div>
-
-                            {/* Stats */}
                             <div>
                                 <h3 className="text-sm font-bold text-slate-900 mb-3">Thống kê</h3>
                                 <div className="grid sm:grid-cols-2 gap-4">
@@ -449,13 +406,7 @@ function HamletEditModal({ hamlet, isCreating, onSave, onClose }: HamletEditModa
                                     ].map((stat) => (
                                         <div key={stat.key}>
                                             <label className="block text-xs font-medium text-slate-500 mb-1">{stat.label}</label>
-                                            <input
-                                                type="text"
-                                                value={(formData.stats as any)?.[stat.key] || ""}
-                                                onChange={(e) => handleStatsChange(stat.key, e.target.value)}
-                                                className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                                                placeholder={stat.placeholder}
-                                            />
+                                            <input type="text" value={(formData.stats as any)?.[stat.key] || ""} onChange={(e) => handleStatsChange(stat.key, e.target.value)} className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" placeholder={stat.placeholder} />
                                         </div>
                                     ))}
                                 </div>
@@ -463,142 +414,46 @@ function HamletEditModal({ hamlet, isCreating, onSave, onClose }: HamletEditModa
                         </div>
                     )}
 
-
-                    {/* Images Tab */}
                     {activeTab === "images" && (
                         <div className="space-y-6">
                             <div>
                                 <label className="block text-sm font-medium text-slate-700 mb-2">Ảnh đại diện (Avatar)</label>
                                 <div className="flex items-start gap-4">
-                                    <div className="w-24 h-24 bg-slate-100 rounded-xl border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden relative cursor-pointer group"
-                                        onClick={() => (document.getElementById('avatar-upload') as HTMLInputElement)?.click()}
-                                    >
-                                        {formData.avatar ? (
-                                            <img src={formData.avatar} className="w-full h-full object-cover" />
-                                        ) : (
-                                            <Image className="text-slate-400" />
-                                        )}
+                                    <div className="w-24 h-24 bg-slate-100 rounded-xl border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden relative cursor-pointer group" onClick={() => (document.getElementById('avatar-upload') as HTMLInputElement)?.click()}>
+                                        {formData.avatar ? <img src={formData.avatar} className="w-full h-full object-cover" /> : <Image className="text-slate-400" />}
                                         <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                                             <Upload className="text-white" size={20} />
                                         </div>
                                     </div>
-                                    <input
-                                        type="file"
-                                        id="avatar-upload"
-                                        hidden
-                                        accept="image/*"
-                                        onChange={async (e) => {
-                                            const file = e.target.files?.[0];
-                                            if (file && isValidImageFile(file)) {
-                                                const base64 = await compressImageToBase64(file, 512);
-                                                handleChange("avatar", base64);
-                                            }
-                                        }}
-                                    />
-                                    <div className="text-sm text-slate-500 max-w-xs">
-                                        Ảnh đại diện hiển thị trong danh sách và thẻ thông tin. Tỉ lệ khuyến nghị 1:1.
-                                    </div>
+                                    <input type="file" id="avatar-upload" hidden accept="image/*" onChange={async (e) => { const file = e.target.files?.[0]; if (file && isValidImageFile(file)) { const base64 = await compressImageToBase64(file, 512); handleChange("avatar", base64); } }} />
+                                    <div className="text-sm text-slate-500 max-w-xs">Ảnh đại diện hiển thị trong danh sách và thẻ thông tin. Tỉ lệ khuyến nghị 1:1.</div>
                                 </div>
                             </div>
-
                             <div>
                                 <label className="block text-sm font-medium text-slate-700 mb-2">Ảnh bìa (Cover)</label>
-                                <div className="w-full h-48 bg-slate-100 rounded-xl border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden relative cursor-pointer group"
-                                    onClick={() => (document.getElementById('cover-upload') as HTMLInputElement)?.click()}
-                                >
-                                    {formData.coverImage ? (
-                                        <img src={formData.coverImage} className="w-full h-full object-cover" />
-                                    ) : (
-                                        <div className="flex flex-col items-center gap-2 text-slate-400">
-                                            <Image size={32} />
-                                            <span>Nhấn để tải lên ảnh bìa</span>
-                                        </div>
-                                    )}
-                                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                        <Upload className="text-white" size={32} />
-                                    </div>
+                                <div className="w-full h-48 bg-slate-100 rounded-xl border-2 border-dashed border-slate-300 flex items-center justify-center overflow-hidden relative cursor-pointer group" onClick={() => (document.getElementById('cover-upload') as HTMLInputElement)?.click()}>
+                                    {formData.coverImage ? <img src={formData.coverImage} className="w-full h-full object-cover" /> : <div className="flex flex-col items-center gap-2 text-slate-400"><Image size={32} /><span>Nhấn để tải lên ảnh bìa</span></div>}
+                                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><Upload className="text-white" size={32} /></div>
                                 </div>
-                                <input
-                                    type="file"
-                                    id="cover-upload"
-                                    hidden
-                                    accept="image/*"
-                                    onChange={async (e) => {
-                                        const file = e.target.files?.[0];
-                                        if (file && isValidImageFile(file)) {
-                                            const base64 = await compressImageToBase64(file, 1200);
-                                            handleChange("coverImage", base64);
-                                        }
-                                    }}
+                                <input type="file" id="cover-upload" hidden accept="image/*" onChange={async (e) => { const file = e.target.files?.[0]; if (file && isValidImageFile(file)) { const base64 = await compressImageToBase64(file, 1200); handleChange("coverImage", base64); } }} />
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === "location" && (
+                        <div className="space-y-4 h-[500px] flex flex-col">
+                            <div className="flex-1 rounded-xl overflow-hidden border border-slate-300 relative">
+                                <HamletMap
+                                    location={formData.location || { lat: 10.5364, lng: 105.6793 }}
+                                    onLocationChange={(lat, lng) => handleChange("location", { lat, lng })}
                                 />
                             </div>
                         </div>
                     )}
 
-                    {/* Location Tab (MapGL) */}
-                    {activeTab === "location" && (
-                        <div className="space-y-4 h-[500px] flex flex-col">
-                            <div className="flex justify-between items-center">
-                                <label className="block text-sm font-medium text-slate-700">Vị trí trên bản đồ</label>
-                                <div className="text-xs text-slate-500">
-                                    Lat: {formData.location?.lat.toFixed(6) || "N/A"},
-                                    Lng: {formData.location?.lng.toFixed(6) || "N/A"}
-                                </div>
-                            </div>
-                            <div className="flex-1 rounded-xl overflow-hidden border border-slate-300 relative">
-                                <Map
-                                    {...({
-                                        initialViewState: {
-                                            longitude: formData.location?.lng || 105.6793,
-                                            latitude: formData.location?.lat || 10.5364,
-                                            zoom: 13
-                                        }
-                                    } as any)}
-                                    mapLib={maplibregl as any}
-                                    style={{ width: '100%', height: '100%' }}
-                                    mapStyle={MAP_STYLE as any}
-                                    onClick={(e) => {
-                                        const { lngLat } = e;
-                                        // Handle both object and array format if types vary
-                                        const lat = (lngLat as any).lat || (lngLat as any)[1];
-                                        const lng = (lngLat as any).lng || (lngLat as any)[0];
-                                        handleChange("location", { lat, lng });
-                                    }}
-                                >
-                                    <NavigationControl />
-                                    {formData.location && (
-                                        <Marker
-                                            longitude={formData.location.lng}
-                                            latitude={formData.location.lat}
-                                            draggable
-                                            onDragEnd={(e) => {
-                                                const { lngLat } = e;
-                                                const lat = (lngLat as any).lat || (lngLat as any)[1];
-                                                const lng = (lngLat as any).lng || (lngLat as any)[0];
-                                                handleChange("location", { lat, lng });
-                                            }}
-                                        >
-                                            <div className="text-primary drop-shadow-lg">
-                                                <MapPin size={40} className="fill-current" />
-                                            </div>
-                                        </Marker>
-                                    )}
-                                </Map>
-                            </div>
-                            <p className="text-xs text-slate-500 italic text-center">
-                                * Nhấn vào bản đồ hoặc kéo thả marker để chọn vị trí.
-                            </p>
-                        </div>
-                    )}
-
-                    {/* Leaders Tab */}
                     {activeTab === "leaders" && (
-
                         <div className="space-y-4">
-                            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                                <Users size={16} />
-                                Lãnh đạo Ấp ({formData.leaders.length})
-                            </h3>
+                            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2"><Users size={16} />Lãnh đạo Ấp ({formData.leaders.length})</h3>
                             <div className="space-y-3">
                                 {formData.leaders.map((leader, idx) => (
                                     <PersonCard key={idx} person={leader} onImageUpload={(file) => handleImageUpload('leaders', idx, file)} onRemove={() => handleRemoveMember('leaders', idx)} uploading={uploading} />
@@ -622,13 +477,9 @@ function HamletEditModal({ hamlet, isCreating, onSave, onClose }: HamletEditModa
                         </div>
                     )}
 
-                    {/* Organizations Tab (Updated) */}
                     {activeTab === "orgs" && (
                         <div className="space-y-4">
-                            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                                <Building2 size={16} />
-                                Tổ Chức Chính Trị - Xã Hội ({formData.organizations?.length || 0})
-                            </h3>
+                            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2"><Building2 size={16} />Tổ Chức Chính Trị - Xã Hội ({formData.organizations?.length || 0})</h3>
                             <div className="space-y-3">
                                 {(formData.organizations || []).map((org, idx) => (
                                     <PersonCard key={idx} person={org} onImageUpload={(file) => handleImageUpload('organizations', idx, file)} onRemove={() => handleRemoveMember('organizations', idx)} uploading={uploading} color="blue" />
@@ -642,8 +493,8 @@ function HamletEditModal({ hamlet, isCreating, onSave, onClose }: HamletEditModa
                                         <input type="file" id="new-org-upload" hidden accept="image/*" onChange={(e) => e.target.files?.[0] && handleNewMemberImageUpload(setNewOrgMember, newOrgMember, e.target.files[0])} />
                                     </div>
                                     <div className="flex-1 grid grid-cols-2 gap-2">
-                                        <input type="text" value={newOrgMember.name} onChange={(e) => setNewOrgMember({ ...newOrgMember, name: e.target.value })} className="px-3 py-2 rounded-lg border border-slate-200 text-sm" placeholder="Tên tổ chức (VD: Chi đoàn)" />
-                                        <input type="text" value={newOrgMember.role} onChange={(e) => setNewOrgMember({ ...newOrgMember, role: e.target.value })} className="px-3 py-2 rounded-lg border border-slate-200 text-sm" placeholder="Vai trò (VD: Tổ chức CT-XH)" />
+                                        <input type="text" value={newOrgMember.name} onChange={(e) => setNewOrgMember({ ...newOrgMember, name: e.target.value })} className="px-3 py-2 rounded-lg border border-slate-200 text-sm" placeholder="Họ tên" />
+                                        <input type="text" value={newOrgMember.role} onChange={(e) => setNewOrgMember({ ...newOrgMember, role: e.target.value })} className="px-3 py-2 rounded-lg border border-slate-200 text-sm" placeholder="Chức vụ" />
                                     </div>
                                     <button onClick={() => handleAddMember('organizations', newOrgMember, newOrgMember, setNewOrgMember)} className="px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary/90 h-10">Thêm</button>
                                 </div>
@@ -651,13 +502,9 @@ function HamletEditModal({ hamlet, isCreating, onSave, onClose }: HamletEditModa
                         </div>
                     )}
 
-                    {/* Security Tab (Updated to be consistent) */}
                     {activeTab === "security" && (
                         <div className="space-y-4">
-                            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-                                <Shield size={16} />
-                                Tổ An Ninh Trật Tự Cơ Sở ({formData.security?.length || 0})
-                            </h3>
+                            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2"><Shield size={16} />Tổ An Ninh Trật Tự Cơ Sở ({formData.security?.length || 0})</h3>
                             <div className="space-y-3">
                                 {(formData.security || []).map((member, idx) => (
                                     <PersonCard key={idx} person={member} onImageUpload={(file) => handleImageUpload('security', idx, file)} onRemove={() => handleRemoveMember('security', idx)} uploading={uploading} color="green" />
@@ -732,37 +579,81 @@ function PersonCard({ person, onImageUpload, onRemove, uploading, color = "blue"
                     disabled={uploading}
                     className="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
                 >
-                    {uploading ? (
-                        <Loader2 className="w-4 h-4 animate-spin text-white" />
-                    ) : (
-                        <Upload size={16} className="text-white" />
-                    )}
+                    {uploading ? <Loader2 className="w-4 h-4 animate-spin text-white" /> : <Upload size={16} className="text-white" />}
                 </button>
-                <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    className="hidden"
-                    onChange={handleFileChange}
-                />
+                <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileChange} />
             </div>
 
             <div className="flex-1 min-w-0">
                 <p className="font-bold text-slate-900 truncate">{person.name}</p>
                 <p className="text-xs text-slate-500 truncate">{person.role}</p>
-                {person.phone && (
-                    <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
-                        <Phone size={10} /> {person.phone}
-                    </p>
-                )}
+                {person.phone && <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5"><Phone size={10} /> {person.phone}</p>}
             </div>
 
-            <button
-                onClick={onRemove}
-                className="p-1.5 text-red-500 hover:bg-red-100 rounded-lg transition-colors"
-            >
-                <X size={16} />
-            </button>
+            <button onClick={onRemove} className="p-1.5 text-red-500 hover:bg-red-100 rounded-lg transition-colors"><X size={16} /></button>
         </div>
+    );
+}
+
+// Inner component for MapLibre
+function HamletMap({ location, onLocationChange }: { location: { lat: number, lng: number }, onLocationChange: (lat: number, lng: number) => void }) {
+    const mapContainerRef = useRef<HTMLDivElement>(null);
+    const mapRef = useRef<any>(null);
+    const markerRef = useRef<any>(null);
+
+    useEffect(() => {
+        if (!mapContainerRef.current) return;
+
+        const map = new maplibregl.Map({
+            container: mapContainerRef.current,
+            style: MAP_STYLE as any,
+            center: [location.lng, location.lat],
+            zoom: 13
+        });
+
+        map.addControl(new maplibregl.NavigationControl());
+        mapRef.current = map;
+
+        const el = document.createElement('div');
+        el.className = 'text-primary drop-shadow-lg';
+        el.innerHTML = `<svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3" fill="white"></circle></svg>`;
+
+        const marker = new maplibregl.Marker({ element: el, draggable: true })
+            .setLngLat([location.lng, location.lat])
+            .addTo(map);
+
+        markerRef.current = marker;
+
+        marker.on('dragend', () => {
+            const lngLat = marker.getLngLat();
+            onLocationChange(lngLat.lat, lngLat.lng);
+        });
+
+        map.on('click', (e) => {
+            const { lng, lat } = e.lngLat;
+            marker.setLngLat([lng, lat]);
+            onLocationChange(lat, lng);
+        });
+
+        return () => map.remove();
+    }, []);
+
+    useEffect(() => {
+        if (markerRef.current) {
+            const current = markerRef.current.getLngLat();
+            if (Math.abs(current.lng - location.lng) > 0.0001 || Math.abs(current.lat - location.lat) > 0.0001) {
+                markerRef.current.setLngLat([location.lng, location.lat]);
+                mapRef.current?.easeTo({ center: [location.lng, location.lat] });
+            }
+        }
+    }, [location]);
+
+    return (
+        <>
+            <div className="absolute top-2 right-2 z-10 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-[10px] font-bold text-slate-500 shadow-sm border border-slate-200">
+                Lat: {location.lat.toFixed(6)}, Lng: {location.lng.toFixed(6)}
+            </div>
+            <div ref={mapContainerRef} className="w-full h-full" />
+        </>
     );
 }

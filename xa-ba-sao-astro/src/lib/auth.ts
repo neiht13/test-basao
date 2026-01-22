@@ -20,7 +20,7 @@ export const auth = betterAuth({
     plugins: [
         openAPI()
     ],
-    trustedOrigins: ["http://localhost:4321", "http://localhost:3000"]
+    trustedOrigins: ["http://localhost:4321", "http://localhost:3000", "https://db62ddb4.xabasao.pages.dev"]
 });
 
 // Export for other uses
