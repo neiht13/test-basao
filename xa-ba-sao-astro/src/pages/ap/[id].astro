@@ -1,0 +1,37 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import HamletDetailClient from '@/components/HamletDetailClient';
+import { HAMLETS_DATA } from '@/lib/data';
+import connectDB from '@/lib/db';
+import Hamlet from '@/models/Hamlet';
+
+// In SSR mode, we need to get the id from params directly
+const { id } = Astro.params;
+
+// Try to fetch from database first
+let hamlet = null;
+
+try {
+  await connectDB();
+  hamlet = await Hamlet.findOne({ id: id }).lean();
+} catch (error) {
+  console.error('Database fetch error:', error);
+}
+
+// Fallback to static data if not found in database
+if (!hamlet) {
+  hamlet = HAMLETS_DATA.find((h) => h.id === id);
+}
+
+// Handle 404 if hamlet not found anywhere
+if (!hamlet) {
+  return Astro.redirect('/404');
+}
+
+// Convert MongoDB document to plain object if needed
+const hamletData = JSON.parse(JSON.stringify(hamlet));
+---
+
+<Layout title={`${hamletData.name} - Xã Ba Sao`} description={hamletData.description}>
+  <HamletDetailClient hamlet={hamletData} client:load />
+</Layout>

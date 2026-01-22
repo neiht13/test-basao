@@ -1,0 +1,37 @@
+# Build Output (File build ra để deploy)
+dist/
+server/
+
+# Generated Types & Cache (Quan trọng với Astro)
+.astro/
+
+# Dependencies (Thư viện)
+node_modules/
+
+# Logs (File log lỗi)
+npm-debug.log*
+yarn-error.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Environment Variables (Bảo mật - Không bao giờ commit file này)
+.env
+.env.production
+.env.development
+.env.local
+.env.*.local
+
+# Editor directories and files (Cấu hình editor cá nhân)
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea
+*.suo
+*.ntvs
+*.njsproj
+*.sln
+*.sw?
+
+# OS files (File rác hệ điều hành)
+.DS_Store
+Thumbs.db
